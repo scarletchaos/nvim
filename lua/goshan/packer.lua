@@ -4,10 +4,9 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 	use("williamboman/mason.nvim")
-	use("nvim-lua/plenary.nvim")
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.2",
+		tag = "0.1.5",
 		-- or                            , branch = '0.1.x',
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
@@ -19,17 +18,25 @@ return require("packer").startup(function(use)
 			vim.cmd("colorscheme kanagawa")
 		end,
 	})
-
+    -- treesitter
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-treesitter/playground")
+    -- harpoon
 	use("theprimeagen/harpoon")
+    -- undo tree
 	use("mbbill/undotree")
-	use("tpope/vim-fugitive")
 	use("ThePrimeagen/vim-be-good")
 	use("mfussenegger/nvim-lint")
+    -- autocompletion engine
+    use("hrsh7th/cmp-nvim-lsp")
+    use("hrsh7th/cmp-buffer")
+    use("hrsh7th/cmp-path")
+    use("hrsh7th/cmp-cmdline")
+    use("hrsh7th/nvim-cmp")
+    --lsp-zero
 	use({
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v2.x",
+		branch = "v3.x",
 		requires = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
@@ -37,35 +44,68 @@ return require("packer").startup(function(use)
 			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
 
 			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" }, -- Required
-			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
 			{ "L3MON4D3/LuaSnip" }, -- Required
 		},
 	})
-	use({
-		"nvim-neorg/neorg",
-		config = function()
-			require("neorg").setup({
-				load = {
-					["core.defaults"] = {}, -- Loads default behaviour
-					["core.concealer"] = {}, -- Adds pretty icons to your documents
-					["core.dirman"] = { -- Manages Neorg workspaces
-						config = {
-							workspaces = {
-								notes = "~/notes",
-							},
-						},
-					},
-				},
-			})
-		end,
-		run = ":Neorg sync-parsers",
-		requires = "nvim-lua/plenary.nvim",
-	})
+    
+    -- git
+    use("airblade/vim-gitgutter")
+    use("tpope/vim-fugitive")
+    -- status line 
+    use("nvim-tree/nvim-web-devicons")
+    use("nvim-lualine/lualine.nvim")
+    -- multiple cursors on visual mode (default keybind is <C-n>)
+    use('mg979/vim-visual-multi')
+    -- file tree
+    use('nvim-tree/nvim-tree.lua')
+
 	use({
 		"stevearc/conform.nvim",
 		config = function()
 			require("conform").setup()
 		end,
 	})
+
+    -- Tagbar
+    use("preservim/tagbar")
+
+    -- Commentary (gcc, gc)
+    use("tpope/vim-commentary")
+
+    use{"neoclide/coc.nvim", branch="release"}
+-- Lua
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        vim.o.timeout = true
+        vim.o.timeoutlen = 300
+        require("which-key").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+}
+    use("folke/trouble.nvim")
+    -- SURROUND
+    use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+})
+    use({
+    "stevearc/oil.nvim",
+    config = function()
+        require("oil").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+    })
+    use {'kevinhwang91/nvim-bqf'}
+
+    use{"ggandor/leap.nvim"}
 end)

@@ -54,9 +54,30 @@ keymap("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<leader>ga", "<cmd>G add %<CR>")
+keymap("n", "<leader>gc", "<cmd>G commit<CR>")
+keymap("n", "<leader>gp", "<cmd>G push<CR>")
+keymap("n", "<leader>gl", "<cmd>G log --oneline --decorate --graph --all<CR>")
 
+-- Navigate subwindows with ctrl+hjkl
+keymap("n", "<C-h>", "<C-w>h")
+keymap("n", "<C-j>", "<C-w>j")
+keymap("n", "<C-k>", "<C-w>k")
+keymap("n", "<C-l>", "<C-w>l")
+
+-- Tagbar
+keymap("n", "<leader>tb", "<cmd>TagbarToggle<CR>")
+
+keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+-- Lua
+keymap("n", "<leader>xx", function() require("trouble").toggle() end)
+keymap("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+keymap("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+keymap("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+keymap("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+keymap("n", "gR", function() require("trouble").toggle("lsp_references") end)
+
+keymap({'n', 'x', 'o'}, 'e', '<Plug>(leap-forward)')
+keymap({'n', 'x', 'o'}, 'E', '<Plug>(leap-backward)')
 

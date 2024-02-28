@@ -1,19 +1,23 @@
+require('mason').setup()
 local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 
-
-
-
-lsp.ensure_installed({
-    'tsserver',
-    'rust_analyzer'
-})
-
--- Fix Undefined global 'vim'
-lsp.nvim_workspace()
-
-
+require('lspconfig').pyright.setup({on_attach = on_attach,
+                                    settings = {
+                                        pyright = {
+                                            autoImportCompletion = true,
+                                        },
+                                        python = {
+                                            analysis = {
+                                                autoSearchPaths = true,
+                                                diagnosticMode = 'openFilesOnly',
+                                                useLibraryCodeForTypes = true,
+                                                typeCheckingMode = 'off'
+                                            }
+                                        }
+                                    }
+                                })
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -26,9 +30,6 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
-})
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
@@ -44,6 +45,7 @@ lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+    vim.keymap.set("n", "gb", function() vim.lsp.buf.back() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
