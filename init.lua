@@ -1,1 +1,1 @@
-require("goshan")
+require("main_config")

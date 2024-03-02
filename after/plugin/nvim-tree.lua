@@ -18,7 +18,7 @@ local function tree(bufnr)
   -- custom mappings
   vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
   vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
-  vim.keymap.set("n", "<leader>t", api.tree.toggle);
+  vim.keymap.set("n", "<leader>tt", api.tree.toggle);
 end
 
 -- OR setup with some options
