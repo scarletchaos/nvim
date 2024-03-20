@@ -4,6 +4,8 @@ local keymap = vim.keymap.set
 vim.g.mapleader = " "
 keymap("n", "<leader>pv", vim.cmd.Ex)
 
+keymap("n", "<leader>-", vim.cmd.split)
+keymap("n", "<leader>|", vim.cmd.vsplit)
 -- Press jk fast to exit insert mode 
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "kj", "<ESC>", opts)

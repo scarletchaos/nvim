@@ -72,7 +72,7 @@ return require("packer").startup(function(use)
     -- Commentary (gcc, gc)
     use("tpope/vim-commentary")
 
-    use{"neoclide/coc.nvim", branch="release"}
+    -- use{"neoclide/coc.nvim", branch="release"}
 -- Lua
     use {
       "folke/which-key.nvim",
