@@ -29,3 +29,4 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+-- vim.api.nvim_exec('set langmap=йцукенгшщзхъёфывапролджэячсмитьбюქწერტყუიოპასდფგჰჯკლზხცვბნმ;qwertyuiop[]\\asdfghjkl\;'zxcvbnm\,.qwertyuiopasdfghjklzxcvbnm')

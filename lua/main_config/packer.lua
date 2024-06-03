@@ -97,15 +97,12 @@ return require("packer").startup(function(use)
         })
     end
 })
-    use({
-    "stevearc/oil.nvim",
-    config = function()
-        require("oil").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
-    end
-    })
-    use {'kevinhwang91/nvim-bqf'}
-
+    use("stevearc/oil.nvim")
+    use{'kevinhwang91/nvim-bqf'}
     use{"ggandor/leap.nvim"}
+    use{"tpope/vim-dadbod"}
+    use{"kristijanhusak/vim-dadbod-ui"}
+    use{"kristijanhusak/vim-dadbod-completion"}
+    use{"ThePrimeagen/git-worktree.nvim"}
+    
 end)
