@@ -2,7 +2,7 @@ require('mason').setup()
 local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
-
+require('lspconfig').gopls.setup{}
 require('lspconfig').pyright.setup({on_attach = on_attach,
                                     settings = {
                                         pyright = {

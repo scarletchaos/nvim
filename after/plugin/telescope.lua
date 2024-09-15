@@ -1,4 +1,5 @@
 require("telescope").load_extension("git_worktree")
+require("telescope").load_extension("live_grep_args")
 local builtin = require('telescope.builtin')
 local worktree = require('telescope').extensions.git_worktree
 vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "fuzzy-find project files" })

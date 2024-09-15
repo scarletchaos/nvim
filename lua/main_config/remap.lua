@@ -62,7 +62,10 @@ keymap("n", "<leader>gk", "<cmd>G push<CR>", { desc = "git push" })
 keymap("n", "<leader>gj", "<cmd>G pull --rebase<CR>", { desc = "git pull --rebase" })
 keymap("n", "<leader>gJ", "<cmd>G pull<CR>", { desc = "git pull" })
 keymap("n", "<leader>gl", "<cmd>G log --oneline --decorate --graph --all<CR>", { desc = "git log but fancy" })
+keymap("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit" })
 
+
+keymap("n", "<leader>db", "<cmd>DBUIToggle<CR>", { desc = "Open DadBod" })
 -- Navigate subwindows with ctrl+hjkl
 keymap("n", "<C-h>", "<C-w>h")
 keymap("n", "<C-j>", "<C-w>j")
@@ -96,3 +99,10 @@ keymap({'n', 'x', 'o'}, 'e', '<Plug>(leap-forward)')
 keymap({'n', 'x', 'o'}, 'E', '<Plug>(leap-backward)')
 keymap("n", "<leader>rp", "<cmd>!./run.sh<CR>")
 
+
+keymap("n", "<leader>tc", function() require("curl").open_curl_tab() end, { desc = "Open a curl tab scoped to CWD" })
+keymap("n", "<leader>to", function() require("curl").open_global_tab() end, { desc = "Open a curl tab with global scope" })
+keymap("n", "<leader>tcsc", function() require("curl").create_scoped_collection() end, { desc = "Create or open a collection with a name from user input" })
+keymap("n", "<leader>tcgc", function() require("curl").create_global_collection() end, { desc = "Create or open a global collection with a name from user input" })
+keymap("n", "<leader>tfsc", function() require("curl").pick_scoped_collection() end, { desc = "Choose a scoped collection and open it" })
+keymap("n", "<leader>tfgc", function() require("curl").pick_global_collection() end, { desc = "Choose a global collection and open it" })
