@@ -140,7 +140,7 @@ return require("packer").startup(function(use)
 					-- ...
 				},
 				indent = {
-					enable = true,
+					enable = false,
 					-- ...
 				},
 			})
