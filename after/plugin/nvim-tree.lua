@@ -1,4 +1,4 @@
- -- disable netrw at the very start of your init.lua
+-- disable netrw at the very start of your init.lua
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
@@ -6,34 +6,34 @@
 vim.opt.termguicolors = true
 
 local function tree(bufnr)
-  local api = require "nvim-tree.api"
+	local api = require("nvim-tree.api")
 
-  local function opts(desc)
-    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
+	local function opts(desc)
+		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+	end
 
-  -- default mappings
-  api.config.mappings.default_on_attach(bufnr)
+	-- default mappings
+	api.config.mappings.default_on_attach(bufnr)
 
-  -- custom mappings
-  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
-  vim.keymap.set("n", "<leader>tt", api.tree.toggle);
+	-- custom mappings
+	vim.keymap.set("n", "<C-t>", api.tree.change_root_to_parent, opts("Up"))
+	vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+	vim.keymap.set("n", "<leader>tt", api.tree.toggle)
 end
 
 -- OR setup with some options
 require("nvim-tree").setup({
-  sort = {
-    sorter = "case_sensitive",
-  },
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = false,
-  },
-  on_attach = tree,
+	sort = {
+		sorter = "case_sensitive",
+	},
+	view = {
+		width = 30,
+	},
+	renderer = {
+		group_empty = true,
+	},
+	filters = {
+		dotfiles = false,
+	},
+	on_attach = tree,
 })

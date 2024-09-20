@@ -6,7 +6,7 @@ keymap("n", "<leader>pv", vim.cmd.Ex)
 
 keymap("n", "<leader>-", vim.cmd.split, { desc = ":split" })
 keymap("n", "<leader>|", vim.cmd.vsplit, { desc = ":vsplit" })
--- Press jk fast to exit insert mode 
+-- Press jk fast to exit insert mode
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "kj", "<ESC>", opts)
 
@@ -14,7 +14,7 @@ keymap("i", "kj", "<ESC>", opts)
 keymap("v", "J", ":m '>+1<CR>gv=gv")
 keymap("v", "K", ":m '<-2<CR>gv=gv")
 
--- Stay in indent mode after indenting 
+-- Stay in indent mode after indenting
 keymap("v", "<", "<gv^", opts)
 keymap("v", ">", ">gv^", opts)
 
@@ -31,11 +31,11 @@ keymap("n", "N", "Nzzzv")
 keymap("x", "<leader>p", [["_dP]], { desc = "Paste without buffering" })
 
 -- Yank something into + register
-keymap({"n", "v"}, "<leader>y", [["+y]])
+keymap({ "n", "v" }, "<leader>y", [["+y]])
 keymap("n", "<leader>Y", [["+Y]])
 
-keymap({"n", "v"}, "<leader>d", [["_d]], { desc = "d without buffering" })
-keymap({"n", "v"}, "<leader>c", [["_c]], { desc = "c without buffering" })
+keymap({ "n", "v" }, "<leader>d", [["_d]], { desc = "d without buffering" })
+keymap({ "n", "v" }, "<leader>c", [["_c]], { desc = "c without buffering" })
 
 -- This is going to get me cancelled
 keymap("i", "<C-c>", "<Esc>")
@@ -50,10 +50,10 @@ keymap("n", "<leader>j", "<cmd>lprev<CR>zz")
 keymap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace under cursor" })
 keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-keymap("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/goshan/packer.lua<CR>");
+keymap("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/goshan/packer.lua<CR>")
 
 keymap("n", "<leader><leader>", function()
-    vim.cmd("so")
+	vim.cmd("so")
 end, { desc = "source this" })
 
 keymap("n", "<leader>ga", "<cmd>G add %<CR>", { desc = "git add this" })
@@ -63,7 +63,6 @@ keymap("n", "<leader>gj", "<cmd>G pull --rebase<CR>", { desc = "git pull --rebas
 keymap("n", "<leader>gJ", "<cmd>G pull<CR>", { desc = "git pull" })
 keymap("n", "<leader>gl", "<cmd>G log --oneline --decorate --graph --all<CR>", { desc = "git log but fancy" })
 keymap("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit" })
-
 
 keymap("n", "<leader>db", "<cmd>DBUIToggle<CR>", { desc = "Open DadBod" })
 -- Navigate subwindows with ctrl+hjkl
@@ -78,31 +77,54 @@ keymap("n", "<leader>tb", "<cmd>TagbarToggle<CR>")
 keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- Lua
-keymap("n", "<leader>xx", function() require("trouble").toggle() end, { desc = "toggle error view" })
-keymap("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end, { desc = "toggle workspace diagnostics" })
-keymap("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end, { desc = "toggle document diagnostics" })
-keymap("n", "<leader>xq", function() require("trouble").toggle("quickfix") end, { desc = "toggle quickfix" })
-keymap("n", "<leader>xl", function() require("trouble").toggle("loclist") end, { desc = "toggle loclist" })
-keymap("n", "gR", function() require("trouble").toggle("lsp_references") end, { desc = "toggle lsp references" })
+keymap("n", "<leader>xx", function()
+	require("trouble").toggle()
+end, { desc = "toggle error view" })
+keymap("n", "<leader>xw", function()
+	require("trouble").toggle("workspace_diagnostics")
+end, { desc = "toggle workspace diagnostics" })
+keymap("n", "<leader>xd", function()
+	require("trouble").toggle("document_diagnostics")
+end, { desc = "toggle document diagnostics" })
+keymap("n", "<leader>xq", function()
+	require("trouble").toggle("quickfix")
+end, { desc = "toggle quickfix" })
+keymap("n", "<leader>xl", function()
+	require("trouble").toggle("loclist")
+end, { desc = "toggle loclist" })
+keymap("n", "gR", function()
+	require("trouble").toggle("lsp_references")
+end, { desc = "toggle lsp references" })
 
 local ruff_active = true
-vim.keymap.set('n', '<leader>tr', function()
-  ruff_active = not ruff_active
-  if ruff_active then
-    vim.cmd("LspStart ruff-lsp")
-  else
-    vim.cmd("LspStop ruff-lsp")
-  end
+vim.keymap.set("n", "<leader>tr", function()
+	ruff_active = not ruff_active
+	if ruff_active then
+		vim.cmd("LspStart ruff-lsp")
+	else
+		vim.cmd("LspStop ruff-lsp")
+	end
 end)
 
-keymap({'n', 'x', 'o'}, 'e', '<Plug>(leap-forward)')
-keymap({'n', 'x', 'o'}, 'E', '<Plug>(leap-backward)')
+keymap({ "n", "x", "o" }, "e", "<Plug>(leap-forward)")
+keymap({ "n", "x", "o" }, "E", "<Plug>(leap-backward)")
 keymap("n", "<leader>rp", "<cmd>!./run.sh<CR>")
 
-
-keymap("n", "<leader>tc", function() require("curl").open_curl_tab() end, { desc = "Open a curl tab scoped to CWD" })
-keymap("n", "<leader>to", function() require("curl").open_global_tab() end, { desc = "Open a curl tab with global scope" })
-keymap("n", "<leader>tcsc", function() require("curl").create_scoped_collection() end, { desc = "Create or open a collection with a name from user input" })
-keymap("n", "<leader>tcgc", function() require("curl").create_global_collection() end, { desc = "Create or open a global collection with a name from user input" })
-keymap("n", "<leader>tfsc", function() require("curl").pick_scoped_collection() end, { desc = "Choose a scoped collection and open it" })
-keymap("n", "<leader>tfgc", function() require("curl").pick_global_collection() end, { desc = "Choose a global collection and open it" })
+keymap("n", "<leader>tc", function()
+	require("curl").open_curl_tab()
+end, { desc = "Open a curl tab scoped to CWD" })
+keymap("n", "<leader>to", function()
+	require("curl").open_global_tab()
+end, { desc = "Open a curl tab with global scope" })
+keymap("n", "<leader>tcsc", function()
+	require("curl").create_scoped_collection()
+end, { desc = "Create or open a collection with a name from user input" })
+keymap("n", "<leader>tcgc", function()
+	require("curl").create_global_collection()
+end, { desc = "Create or open a global collection with a name from user input" })
+keymap("n", "<leader>tfsc", function()
+	require("curl").pick_scoped_collection()
+end, { desc = "Choose a scoped collection and open it" })
+keymap("n", "<leader>tfgc", function()
+	require("curl").pick_global_collection()
+end, { desc = "Choose a global collection and open it" })
