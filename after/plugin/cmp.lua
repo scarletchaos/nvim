@@ -8,3 +8,4 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
 	}),
 })
+

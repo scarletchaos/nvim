@@ -18,3 +18,4 @@ vim.keymap.set({ "n", "v" }, "<leader>f", function() -- Make prettier
 		timeout_ms = 1000,
 	})
 end, { desc = "format file or range (in visual mode)" })
+

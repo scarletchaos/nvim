@@ -5,3 +5,4 @@ require("git-worktree").setup({
 	-- clearjumps_on_change = <boolean> -- default: true,
 	-- autopush = <boolean> -- default: false,
 })
+
