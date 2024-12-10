@@ -38,28 +38,14 @@ lazy.setup({
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = { "nvim-telescope/telescope-live-grep-args.nvim", 'nvim-lua/plenary.nvim' },
     },
-    {
-        "ThePrimeagen/git-worktree.nvim" 
-    },
+    { "ThePrimeagen/git-worktree.nvim" },
     -- LSP AND AUTOCOMPLETION
-    {
-        "williamboman/mason.nvim"
-    },
-    { 
-        "hrsh7th/cmp-nvim-lsp"
-    },
-    { 
-        "hrsh7th/cmp-buffer"
-    },
-    { 
-        "hrsh7th/cmp-path"
-    },
-    { 
-        "hrsh7th/cmp-cmdline"
-    },
-    { 
-        "hrsh7th/nvim-cmp"
-    },
+    { "williamboman/mason.nvim" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/cmp-buffer" },
+    { "hrsh7th/cmp-path" },
+    { "hrsh7th/cmp-cmdline" },
+    { "hrsh7th/nvim-cmp" },
     {
 	"VonHeikemen/lsp-zero.nvim",
 	branch = "v4.x",
@@ -79,13 +65,9 @@ lazy.setup({
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
     },
-	{
-        "nvim-treesitter/playground"
-    },
+	{ "nvim-treesitter/playground" },
     -- UNDOTREE
-    {
-        "mbbill/undotree"
-    },
+    { "mbbill/undotree" },
     {
 		"folke/which-key.nvim",
 		config = function()
@@ -99,34 +81,15 @@ lazy.setup({
 		end,
 	},
     -- GIT
-    {
-		"kdheepak/lazygit.nvim",
-		-- optional for floating window border decoration
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
-	},
-    { 
-        "airblade/vim-gitgutter"
-    },
-    { 
-        "tpope/vim-fugitive"
-    },
+    { "airblade/vim-gitgutter" },
+    { "tpope/vim-fugitive" },
 	-- STATUS LINE
-    { 
-        "nvim-tree/nvim-web-devicons"
-    },
-    { 
-        "nvim-lualine/lualine.nvim"
-    },
+    { "nvim-tree/nvim-web-devicons" },
+    { "nvim-lualine/lualine.nvim" },
 	-- MULTIPLE CURSORS ON VISUAL MODE (DEFAULT KEYBIND IS <C-N>)
-    { 
-        "mg979/vim-visual-multi"
-    },
+    { "mg979/vim-visual-multi" },
 	-- FILE TREE
-    { 
-        "nvim-tree/nvim-tree.lua"
-    },
+    { "nvim-tree/nvim-tree.lua" },
 
 	{
 		"stevearc/conform.nvim",
@@ -136,16 +99,10 @@ lazy.setup({
 	},
 
 	-- Tagbar
-    { 
-        "preservim/tagbar"
-    },
+    { "preservim/tagbar" },
 	-- Commentary (gcc, gc)
-    { 
-        "tpope/vim-commentary"
-    },
-    { 
-        "folke/trouble.nvim"
-    },
+    { "tpope/vim-commentary" },
+    { "folke/trouble.nvim" },
 	-- SURROUND
 	{
 		"kylechui/nvim-surround",
@@ -157,21 +114,11 @@ lazy.setup({
 			})
 		end,
 	},
-	{
-        "kevinhwang91/nvim-bqf" 
-    },
-	{
-        "ggandor/leap.nvim" 
-    },
-	{
-        "tpope/vim-dadbod" 
-    },
-	{
-        "kristijanhusak/vim-dadbod-ui" 
-    },
-	{
-        "kristijanhusak/vim-dadbod-completion" 
-    },
+	{ "kevinhwang91/nvim-bqf" },
+	{ "ggandor/leap.nvim" },
+	{ "tpope/vim-dadbod" },
+	{ "kristijanhusak/vim-dadbod-ui" },
+	{ "kristijanhusak/vim-dadbod-completion" },
 
     {
       "shellRaining/hlchunk.nvim",
@@ -190,15 +137,9 @@ lazy.setup({
       end,
     },
     -- harpoon
-    {
-        "theprimeagen/harpoon"
-    },
-    { 
-        "ThePrimeagen/vim-be-good"
-    },
-    { 
-        "mfussenegger/nvim-lint"
-    },
+    { "theprimeagen/harpoon" },
+    { "ThePrimeagen/vim-be-good" },
+    { "mfussenegger/nvim-lint" },
     -- snacks
     {
       "folke/snacks.nvim",
@@ -211,5 +152,6 @@ lazy.setup({
         statuscolumn = { enabled = true },
         words = { enabled = true },
       },
-    }
+    },
+    { "mistricky/codesnap.nvim", build = "make" },
 })

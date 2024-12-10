@@ -62,7 +62,6 @@ keymap("n", "<leader>gk", "<cmd>G push<CR>", { desc = "git push" })
 keymap("n", "<leader>gj", "<cmd>G pull --rebase<CR>", { desc = "git pull --rebase" })
 keymap("n", "<leader>gJ", "<cmd>G pull<CR>", { desc = "git pull" })
 keymap("n", "<leader>gl", "<cmd>G log --oneline --decorate --graph --all<CR>", { desc = "git log but fancy" })
-keymap("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit" })
 
 keymap("n", "<leader>db", "<cmd>DBUIToggle<CR>", { desc = "Open DadBod" })
 -- Navigate subwindows with ctrl+hjkl
