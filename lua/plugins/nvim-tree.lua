@@ -38,3 +38,4 @@ require("nvim-tree").setup({
 	on_attach = tree,
 })
 
+require("nvim-tree.api").tree.toggle()

@@ -105,8 +105,6 @@ vim.keymap.set("n", "<leader>tr", function()
 	end
 end)
 
-keymap({ "n", "x", "o" }, "e", "<Plug>(leap-forward)")
-keymap({ "n", "x", "o" }, "E", "<Plug>(leap-backward)")
 keymap("n", "<leader>rp", "<cmd>!./run.sh<CR>")
 
 

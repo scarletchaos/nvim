@@ -23,32 +23,51 @@ lazy.setup({
 		vim.cmd("colorscheme kanagawa")
 	end,
     },
-    -- OIL 
+
+    -- FILE EXPLORATION
     {
          'stevearc/oil.nvim',
          ---@module 'oil'
          ---@type oil.SetupOpts
          opts = {},
-         -- Optional dependencies
          dependencies = { { "echasnovski/mini.icons", opts = {} } },
-         -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+         config = function()
+             require("plugins.oil")
+         end,
     },
-    -- TELESCOPE AND PLUGINS
+
+    -- TELESCOPE AND EXTENSIONS
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
+        event = "VeryLazy",
         dependencies = { "nvim-telescope/telescope-live-grep-args.nvim", 'nvim-lua/plenary.nvim' },
+        config = function()
+            require("plugins.telescope")
+        end,
     },
-    { "ThePrimeagen/git-worktree.nvim" },
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    {
+        "ThePrimeagen/git-worktree.nvim",
+        config = function()
+            require("plugins.worktree")
+        end,
+    },
+
     -- LSP AND AUTOCOMPLETION
     { "williamboman/mason.nvim" },
     { "hrsh7th/cmp-nvim-lsp" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-path" },
     { "hrsh7th/cmp-cmdline" },
-    { "hrsh7th/nvim-cmp" },
+    {
+        "hrsh7th/nvim-cmp",
+        config = function()
+            require("plugins.cmp")
+        end,
+    },
     {
 	"VonHeikemen/lsp-zero.nvim",
-	branch = "v4.x",
+	branch = "v3.x",
 	dependencies = {
 		-- LSP Support
 		{ "neovim/nvim-lspconfig" }, -- Required
@@ -64,62 +83,91 @@ lazy.setup({
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
+        config = function()
+            require("plugins.treesitter")
+        end,
     },
-	{ "nvim-treesitter/playground" },
-    -- UNDOTREE
-    { "mbbill/undotree" },
+    { "nvim-treesitter/playground" },
+
+    -- GIT INTEGRATION
+    { "airblade/vim-gitgutter" },
+    {
+        "tpope/vim-fugitive",
+        config = function()
+            require("plugins.fugitive")
+        end,
+    },
+
+    -- STATUS LINE AND ICONS
+    { "nvim-tree/nvim-web-devicons" },
+    {
+        "nvim-lualine/lualine.nvim",
+        config = function()
+            require("plugins.lualine")
+        end,
+    },
+
+    -- MULTIPLE CURSORS
+    { "mg979/vim-visual-multi" },
+
+    -- NAVIGATION
+    {
+        "ggandor/leap.nvim",
+        dependencies = {"tpope/vim-repeat"},
+        config = function()
+            require('leap').create_default_mappings()
+        end,
+    },
+    {
+        "theprimeagen/harpoon",
+        event = "VeryLazy",
+        config = function()
+            require("plugins.harpoon")
+        end,
+    },
+
+    -- DEBUGGING
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+        config = function()
+            require("plugins.dap")
+        end,
+    },
+    { "mfussenegger/nvim-dap-python" },
+    { "theHamsta/nvim-dap-virtual-text" },
+
+    -- UTILITIES
+    {
+        "mbbill/undotree",
+        config = function()
+            require("plugins.undotree")
+        end,
+    },
     {
 		"folke/which-key.nvim",
 		config = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
-			require("which-key").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			require("which-key").setup({})
 		end,
 	},
-    -- GIT
-    { "airblade/vim-gitgutter" },
-    { "tpope/vim-fugitive" },
-	-- STATUS LINE
-    { "nvim-tree/nvim-web-devicons" },
-    { "nvim-lualine/lualine.nvim" },
-	-- MULTIPLE CURSORS ON VISUAL MODE (DEFAULT KEYBIND IS <C-N>)
-    { "mg979/vim-visual-multi" },
-	-- FILE TREE
-    { "nvim-tree/nvim-tree.lua" },
+    { "tpope/vim-dadbod" },
+    { "kristijanhusak/vim-dadbod-ui" },
+    { "kristijanhusak/vim-dadbod-completion" },
 
-	{
-		"stevearc/conform.nvim",
-		config = function()
-			require("conform").setup()
-		end,
-	},
-
-	-- Tagbar
-    { "preservim/tagbar" },
-	-- Commentary (gcc, gc)
+    -- TEXT MANIPULATION
     { "tpope/vim-commentary" },
-    { "folke/trouble.nvim" },
-	-- SURROUND
-	{
+    {
 		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		version = "*",
         event = "VeryLazy",
 		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
+			require("nvim-surround").setup({})
 		end,
 	},
-	{ "kevinhwang91/nvim-bqf" },
-	{ "ggandor/leap.nvim" },
-	{ "tpope/vim-dadbod" },
-	{ "kristijanhusak/vim-dadbod-ui" },
-	{ "kristijanhusak/vim-dadbod-completion" },
 
+    -- CHUNK HIGHLIGHTING
     {
       "shellRaining/hlchunk.nvim",
       config = function()
@@ -136,22 +184,49 @@ lazy.setup({
         })
       end,
     },
-    -- harpoon
-    { "theprimeagen/harpoon" },
-    { "ThePrimeagen/vim-be-good" },
-    { "mfussenegger/nvim-lint" },
-    -- snacks
+
+    -- LINTERS AND FORMATTERS
     {
-      "folke/snacks.nvim",
-      priority = 1000,
-      lazy = false,
-      opts = {
-        bigfile = { enabled = true },
-        notifier = { enabled = true },
-        quickfile = { enabled = true },
-        statuscolumn = { enabled = true },
-        words = { enabled = true },
-      },
+        "mfussenegger/nvim-lint",
+        config = function()
+            require("plugins.lint")
+        end,
+    },
+    {
+        "stevearc/conform.nvim",
+        event = "VeryLazy",
+		config = function()
+			require("plugins.conform")
+		end,
+	},
+
+    -- MISC
+    {
+        "folke/trouble.nvim" },
+    {
+        "folke/snacks.nvim",
+        event = 'VeryLazy',
+        priority = 1000,
+        -- lazy = false,
+        opts = {
+            bigfile = { enabled = true },
+            notifier = { enabled = true },
+            quickfile = { enabled = true },
+            statuscolumn = { enabled = true },
+            words = { enabled = true },
+        },
+        config = function()
+            require("plugins.snacks")
+        end,
     },
     { "mistricky/codesnap.nvim", build = "make" },
+    { "ThePrimeagen/vim-be-good" },
+    { "kevinhwang91/nvim-bqf" },
+    { "preservim/tagbar" },
+    {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+    },
 })
+
