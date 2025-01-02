@@ -116,12 +116,3 @@ end)
 
 -- Run script
 keymap("n", "<leader>rp", "<cmd>!./run.sh<CR>")
-
--- Curl
-keymap("n", "<leader>tc", function() require("curl").open_curl_tab() end, { desc = "Open a curl tab scoped to CWD" })
-keymap("n", "<leader>to", function() require("curl").open_global_tab() end, { desc = "Open a curl tab with global scope" })
-keymap("n", "<leader>tcsc", function() require("curl").create_scoped_collection() end, { desc = "Create or open a collection with a name from user input" })
-keymap("n", "<leader>tcgc", function() require("curl").create_global_collection() end, { desc = "Create or open a global collection with a name from user input" })
-keymap("n", "<leader>tfsc", function() require("curl").pick_scoped_collection() end, { desc = "Choose a scoped collection and open it" })
-keymap("n", "<leader>tfgc", function() require("curl").pick_global_collection() end, { desc = "Choose a global collection and open it" })
-
