@@ -169,22 +169,12 @@ lazy.setup({
 
     -- CHUNK HIGHLIGHTING
     {
-      "shellRaining/hlchunk.nvim",
-      config = function()
-        require('hlchunk').setup({
-            indent = {
-                chars = { "│", "¦", "┆", "┊", },
-                style = {
-                    "#8B00FF",
-                },
-            },
-            blank = {
-                enable = false,
-            }
-        })
-      end,
+        "shellRaining/hlchunk.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("plugins.hlchunk")
+        end
     },
-
     -- LINTERS AND FORMATTERS
     {
         "mfussenegger/nvim-lint",
@@ -201,8 +191,7 @@ lazy.setup({
 	},
 
     -- MISC
-    {
-        "folke/trouble.nvim" },
+    { "folke/trouble.nvim" },
     {
         "folke/snacks.nvim",
         event = 'VeryLazy',
