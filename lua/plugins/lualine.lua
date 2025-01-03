@@ -2,7 +2,7 @@ require('lualine').setup{
     sections = {
         lualine_c = {
             {
-                'filename', 
+                'filename',
                 path = 1
             }
     }

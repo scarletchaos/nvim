@@ -6,19 +6,6 @@ local telescope = require("telescope")
 local builtin = require('telescope.builtin')
 local worktree = require('telescope').extensions.git_worktree
 
--- local gitignore = vim.fn.getcwd() .. "/.gitignore.telescope"
-
-
--- if vim.fn.filereadable(gitignore) == 0 then
---     gitignore = vim.fn.getcwd() .. '.gitignore'
--- end
-
--- telescope.setup({
---     defaults = {
---         find_command = { "rg", "--files", "--hidden", "--ignore-file", gitignore },
---     },
--- })
-
 local keymap = vim.keymap.set
 
 
@@ -27,7 +14,7 @@ keymap('n', '<leader>pf', builtin.find_files, { desc = "fuzzy-find project files
 keymap('n', '<C-p>', builtin.git_files, {})
 keymap('n', '<leader>ps', function ()
     builtin.grep_string()
-end, { desc = "grep string" })
+end, { desc = "find word under cursor" })
 keymap('n', '<leader>lf', function ()
     builtin.live_grep()
 end, { desc = "grep project files" })

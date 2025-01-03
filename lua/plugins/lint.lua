@@ -10,7 +10,7 @@ lint.linters_by_ft = {
 -- Keymap to manually trigger linting
 vim.keymap.set("n", "<leader>l", function()
     lint.try_lint()
-end, { desc = "Run linters" })
+end, { desc = "run linters" })
 
 -- Auto lint on specific events (optional, commented out)
 -- local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

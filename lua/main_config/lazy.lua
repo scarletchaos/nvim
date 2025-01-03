@@ -108,6 +108,7 @@ lazy.setup({
 
 	-- STATUS LINE AND ICONS
 	{ "nvim-tree/nvim-web-devicons" },
+    { "echasnovski/mini.icons" },
 	{
 		"nvim-lualine/lualine.nvim",
 		config = function()

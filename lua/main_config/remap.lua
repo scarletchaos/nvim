@@ -28,9 +28,9 @@ keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
 
 -- Clipboard and paste
-keymap("x", "<leader>p", [["_dP]], { desc = "Paste without buffering" })
-keymap({ "n", "v" }, "<leader>y", [["+y]])
-keymap("n", "<leader>Y", [["+Y]])
+keymap("x", "<leader>p", [["_dP]], { desc = "p without buffering" })
+keymap({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank to system clipboard" })
+keymap("n", "<leader>Y", [["+Y]], { desc = "yank to system clipboard" })
 keymap({ "n", "v" }, "<leader>d", [["_d]], { desc = "d without buffering" })
 keymap({ "n", "v" }, "<leader>c", [["_c]], { desc = "c without buffering" })
 
@@ -43,10 +43,9 @@ keymap("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- Text replacements
 keymap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "replace under cursor" })
-keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "make executable" })
 
 -- Configuration editing
-keymap("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/goshan/packer.lua<CR>")
 keymap("n", "<leader><leader>", function()
 	vim.cmd("so")
 end, { desc = "source this" })
@@ -68,51 +67,42 @@ keymap("n", "<C-l>", "<C-w>l")
 
 -- Plugins
 -- Tagbar
-keymap("n", "<leader>tb", "<cmd>TagbarToggle<CR>")
+keymap("n", "<leader>tb", "<cmd>TagbarToggle<CR>", { desc = "toggle tagbar" })
 -- Oil
 keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Trouble
-keymap("n", "<leader>xx", function()
-	require("trouble").toggle()
-end, { desc = "toggle error view" })
-keymap("n", "<leader>xw", function()
-	require("trouble").toggle("workspace_diagnostics")
-end, { desc = "toggle workspace diagnostics" })
-keymap("n", "<leader>xd", function()
-	require("trouble").toggle("document_diagnostics")
-end, { desc = "toggle document diagnostics" })
-keymap("n", "<leader>xq", function()
-	require("trouble").toggle("quickfix")
-end, { desc = "toggle quickfix" })
-keymap("n", "<leader>xl", function()
-	require("trouble").toggle("loclist")
-end, { desc = "toggle loclist" })
-keymap("n", "gR", function()
-	require("trouble").toggle("lsp_references")
-end, { desc = "toggle lsp references" })
+keymap("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+keymap("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
+keymap("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
+keymap(
+	"n",
+	"<leader>cl",
+	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+	{ desc = "LSP Definitions / references / ... (Trouble)" }
+)
+keymap("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
+keymap("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 
 -- Toggle line numbers
 function ToggleLineNumbers()
-    if vim.wo.relativenumber then
-        vim.wo.relativenumber = false
-        vim.wo.number = true
-    else
-        vim.wo.relativenumber = true
-        vim.wo.number = true
-    end
+	if vim.wo.relativenumber then
+		vim.wo.relativenumber = false
+		vim.wo.number = true
+	else
+		vim.wo.relativenumber = true
+		vim.wo.number = true
+	end
 end
 keymap("n", "<leader>rl", ToggleLineNumbers, { desc = "toggle relative line numbers" })
 
 -- Ruff toggle
-local ruff_active = true
+local ruff_active = false
 vim.keymap.set("n", "<leader>tr", function()
 	ruff_active = not ruff_active
 	if ruff_active then
-		vim.cmd("LspStart ruff-lsp")
+		vim.cmd("LspStart ruff_lsp")
 	else
-		vim.cmd("LspStop ruff-lsp")
+		vim.cmd("LspStop ruff_lsp")
 	end
-end)
+end, { desc = "toggle ruff" })
 
--- Run script
-keymap("n", "<leader>rp", "<cmd>!./run.sh<CR>")

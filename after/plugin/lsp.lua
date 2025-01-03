@@ -22,28 +22,15 @@ require("lspconfig").pyright.setup({
 
 require("lspconfig").lua_ls.setup({
 	on_init = function(client)
-		-- local path = client.workspace_folders[1].name
-		-- if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-		-- 	return
-		-- end
-
 		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
 			runtime = {
-				-- Tell the language server which version of Lua you're using
-				-- (most likely LuaJIT in the case of Neovim)
 				version = "LuaJIT",
 			},
-			-- Make the server aware of Neovim runtime files
 			workspace = {
 				checkThirdParty = false,
 				library = {
 					vim.env.VIMRUNTIME,
-					-- Depending on the usage, you might want to add additional paths here.
-					-- "${3rd}/luv/library"
-					-- "${3rd}/busted/library",
 				},
-				-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-				-- library = vim.api.nvim_get_runtime_file("", true)
 			},
 		})
 	end,
@@ -51,6 +38,7 @@ require("lspconfig").lua_ls.setup({
 		Lua = {},
 	},
 })
+
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -136,4 +124,37 @@ require("lspconfig").ruff_lsp.setup({
 vim.diagnostic.config({
 	virtual_text = true,
 })
+
+-- local function toggle_type_checking()
+--     local lspconfig = require("lspconfig")
+
+--     -- Safely access the settings table or initialize it if nil
+--     local pyright_config = lspconfig.pyright
+--     if not pyright_config.settings then
+--         pyright_config.settings = { python = { analysis = { typeCheckingMode = "off" } } }
+--     end
+
+--     local current_mode = pyright_config.settings.python.analysis.typeCheckingMode or "off"
+
+--     -- Toggle between "off" and "basic" (or "strict")
+--     local new_mode = current_mode == "off" and "basic" or "off"
+--     pyright_config.settings.python.analysis.typeCheckingMode = new_mode
+
+--     -- Notify the user
+--     vim.notify("Type Checking Mode: " .. new_mode, vim.log.levels.INFO)
+
+--     -- Restart the LSP client for changes to take effect
+--     for _, client in pairs(vim.lsp.get_active_clients()) do
+--         if client.name == "pyright" then
+--             client:stop() -- Ensure `stop()` is called properly
+--             vim.defer_fn(function()
+--                 vim.cmd("LspStart pyright") -- Use `LspStart` to restart the client
+--             end, 100)
+--         end
+--     end
+-- end
+
+
+
+-- vim.keymap.set("n", "<leader>tc", toggle_type_checking, { desc = "Toggle Pyright Type Checking" })
 
