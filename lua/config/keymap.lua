@@ -86,9 +86,9 @@ local ruff_active = false
 vim.keymap.set('n', '<leader>tr', function()
   ruff_active = not ruff_active
   if ruff_active then
-    vim.cmd 'LspStart ruff_lsp'
+    vim.cmd 'LspStart ruff'
   else
-    vim.cmd 'LspStop ruff_lsp'
+    vim.cmd 'LspStop ruff'
   end
 end, { desc = '[t]oggle [r]uff' })
 
