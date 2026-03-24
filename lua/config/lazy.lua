@@ -450,7 +450,7 @@ require('lazy').setup({
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map('grd', vim.lsp.buf.declaration, '[g]oto [d]eclaration')
+          map('grD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -636,8 +636,15 @@ require('lazy').setup({
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      local use_lsp_config = vim.fn.has('nvim-0.11') == 1
       for server_name, server_config in pairs(servers) do
-        require('lspconfig')[server_name].setup(server_config)
+        server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+        if use_lsp_config then
+          vim.lsp.config(server_name, server_config)
+          vim.lsp.enable(server_name)
+        else
+          require('lspconfig')[server_name].setup(server_config)
+        end
       end
     end,
   },

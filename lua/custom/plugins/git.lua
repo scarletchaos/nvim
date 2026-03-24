@@ -18,4 +18,18 @@ return {
   keys = {
     { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
   },
+  config = function()
+    local group = vim.api.nvim_create_augroup('LazyGitFocus', { clear = true })
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'FocusGained' }, {
+      group = group,
+      callback = function()
+        if vim.bo.buftype ~= 'terminal' then
+          return
+        end
+        if vim.bo.filetype == 'lazygit' then
+          vim.cmd('startinsert')
+        end
+      end,
+    })
+  end,
 }

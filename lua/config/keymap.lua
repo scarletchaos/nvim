@@ -56,12 +56,6 @@ keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 keymap('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'replace under cursor' })
 
-keymap('n', 'J', 'mzJ`z')
-keymap('n', '<C-d>', '<C-d>zz')
-keymap('n', '<C-u>', '<C-u>zz')
-keymap('n', 'n', 'nzzzv')
-keymap('n', 'N', 'Nzzzv')
-
 -- Clipboard and paste
 keymap('x', '<leader>p', [["_dP]], { desc = 'p without buffering' })
 keymap({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'yank to system clipboard' })
@@ -70,7 +64,7 @@ keymap({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'd without buffering' })
 keymap({ 'n', 'v' }, '<leader>c', [["_c]], { desc = 'c without buffering' })
 
 -- Toggle line numbers
-function ToggleLineNumbers()
+local function toggle_line_numbers()
   if vim.wo.relativenumber then
     vim.wo.relativenumber = false
     vim.wo.number = true
@@ -79,7 +73,7 @@ function ToggleLineNumbers()
     vim.wo.number = true
   end
 end
-keymap('n', '<leader>tl', ToggleLineNumbers, { desc = '[t]oggle relative [l]ine numbers' })
+keymap('n', '<leader>tl', toggle_line_numbers, { desc = '[t]oggle relative [l]ine numbers' })
 
 -- Ruff toggle
 local ruff_active = false
